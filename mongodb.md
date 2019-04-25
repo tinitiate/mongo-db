@@ -10,4 +10,7 @@
 * [mongodb collections json schema](mongodb-collections-json-schema.html)
 * [mongodb collections modeling](mongodb-collections-modeling.html)
 * [mongodb documents insert](mongodb-documents-insert.html)
+* [mongodb documents update](mongodb-documents-update.html)
+* [mongodb documents delete](mongodb-documents-delete.html)
 * [mongodb documents query](mongodb-documents-query.html)
+* [mongodb documents joins](mongodb-documents-joins.html)

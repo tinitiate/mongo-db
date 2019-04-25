@@ -189,6 +189,19 @@ db.Employee.find( { boss : { $exists: false } } )
 ```
 
 
+### Querying Using IN and Not IN clause
+* **IN Clause** using the `$in` Get all records from the document where `JOB`
+  IN `SALESMAN,CLERK`
+```
+db.Employee.find({"job" : {$in : ["SALESMAN","CLERK"]}})
+```
+* **NOT IN Clause** `$nin` Get all records from the document where `JOB` NOT 
+  IN `SALESMAN,CLERK`
+```
+db.Employee.find({"job" : {$nin : ["SALESMAN","CLERK"]}})
+```
+
+
 ### Query Sort() and Limit()
 * `Sort()` 
 * Sort data in Ascending Order use column name and 1
@@ -217,12 +230,31 @@ db.Employee.find().count()
 ```
 
 
+### Query Aggregation using Group By using $group()
+* `$group()` is used to perform aggregate operations
+* Get Distinct `job` from `Employee`
+```
+db.Employee.aggregate([{$group: {_id: "$job"}}])
+```
+* Get Count of a column
+```
+db.Employee.aggregate([{$group: {_id: "$job", count:{$sum:1}}}])
+```
+* Get Sum of a column
+* Get SUM of SALARY in every DEPARTMENT
+```
+db.Employee.aggregate([{$group: {_id: "$job", "total_salary" :{$sum:"$salary"} }}])
+```
+* Get Min, Max of a column
+```
+db.Employee.aggregate([{$group: {_id: "$job", "min_salary" :{$min:"$salary"}, "max_salary" :{$max:"$salary"} }}])
+```
+
+db.Employee.aggregate([{$group: {_id: "$job", empno: {$first: "$empno"}, name: {$first: "$name"}, "min_salary" :{$min:"$salary"}, "max_salary" :{$max:"$salary"} }}])
+
 ### Query pretty()
 * `pretty()` 
 * Prettifies the JSON output
 ```
 db.Employee.find().sort({empno:-1}).pretty()
 ```
-
-
-
